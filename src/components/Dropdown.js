@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { GoChevronDown } from "react-icons/go";
-import Panel from "./Panel";
+import { useState, useEffect, useRef } from 'react';
+import { GoChevronDown } from 'react-icons/go';
+import Panel from './Panel';
 
-function Dropdown({ options, onChange, value }) {
+function Dropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
   const divEl = useRef();
 
@@ -17,12 +17,10 @@ function Dropdown({ options, onChange, value }) {
       }
     };
 
-    document.addEventListener("click", handler, true);
+    document.addEventListener('click', handler, true);
 
-    //clean up function
-    //will remove the listener when the component is not visible
     return () => {
-      document.removeEventListener("click", handler);
+      document.removeEventListener('click', handler);
     };
   }, []);
 
@@ -31,17 +29,14 @@ function Dropdown({ options, onChange, value }) {
   };
 
   const handleOptionClick = (option) => {
-    //close the dropdown
     setIsOpen(false);
-
-    //what option did the user click on ?
     onChange(option);
   };
 
   const renderedOptions = options.map((option) => {
     return (
       <div
-        className="hover:bg-sky-100 rounder cursor-pointer p-1"
+        className="hover:bg-sky-100 rounded cursor-pointer p-1"
         onClick={() => handleOptionClick(option)}
         key={option.value}
       >
@@ -56,12 +51,10 @@ function Dropdown({ options, onChange, value }) {
         className="flex justify-between items-center cursor-pointer"
         onClick={handleClick}
       >
-        {value?.label || "Select..."}
+        {value?.label || 'Select...'}
         <GoChevronDown className="text-lg" />
       </Panel>
-      {isOpen && (
-        <Panel className="absolute top-full ">{renderedOptions}</Panel>
-      )}
+      {isOpen && <Panel className="absolute top-full">{renderedOptions}</Panel>}
     </div>
   );
 }

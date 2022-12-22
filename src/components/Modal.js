@@ -1,14 +1,12 @@
-import ReactDOM from "react-dom";
-import { useEffect } from "react";
+import ReactDOM from 'react-dom';
+import { useEffect } from 'react';
 
 function Modal({ onClose, children, actionBar }) {
-  //stop the user from being able to scroll pass the modal
   useEffect(() => {
-    document.body.classList.add("overflow-hidden");
+    document.body.classList.add('overflow-hidden');
 
-    //clean up to run when modal is removed
     return () => {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove('overflow-hidden');
     };
   }, []);
 
@@ -25,7 +23,7 @@ function Modal({ onClose, children, actionBar }) {
         </div>
       </div>
     </div>,
-    document.querySelector(".modal-container")
+    document.querySelector('.modal-container')
   );
 }
 
